@@ -1,0 +1,134 @@
+{
+  "identity": {
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Refined Authority, Organic Luxury, Global Connectivity",
+    "key_principles": [
+      "Fusion over Imitation: Mix Old World Trade aesthetics with Modern SaaS precision.",
+      "Emotion First: Calm assurance, tactile warmth.",
+      "Negative Space: Massive breathing room (p-12 to p-32).",
+      "No Generic Gradients: Use grain/noise or solid earthy tones."
+    ]
+  },
+  "theme": {
+    "mode": "light",
+    "strategy": "Organic & Earthy (The 'Old Money' Global Trade Look)",
+    "background_color": "#F9F8F6"
+  },
+  "typography": {
+    "headings": {
+      "font_family": "Cormorant Garamond, serif",
+      "weights": ["400", "500", "600"],
+      "usage": "All H1-H3 headers. H1 should be massive (text-6xl+).",
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Manrope, sans-serif",
+      "weights": ["400", "500"],
+      "usage": "Paragraphs, navigation, buttons.",
+      "letter_spacing": "tracking-normal"
+    },
+    "labels": {
+      "font_family": "Manrope, sans-serif",
+      "usage": "Overlines, badges, chart labels.",
+      "style": "uppercase tracking-widest text-xs font-semibold"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": "#2F2F2F", 
+      "primary_foreground": "#F9F8F6",
+      "secondary": "#B46A4D",
+      "secondary_foreground": "#FFFFFF",
+      "accent": "#6F7D5A",
+      "accent_foreground": "#FFFFFF",
+      "background": "#F9F8F6",
+      "surface": "#FFFFFF",
+      "muted": "#EBE9E4",
+      "border": "#D8CFC4",
+      "text": {
+        "primary": "#2F2F2F",
+        "secondary": "#5C5C5C",
+        "brand": "#B46A4D"
+      }
+    },
+    "rules": [
+      "NO bright greens (#00FF00) or trendy neon.",
+      "NO purple/violet gradients.",
+      "Use 'Warm Clay' (#B46A4D) sparingly for high-value CTAs.",
+      "Use 'Olive' (#6F7D5A) for sustainability indicators."
+    ]
+  },
+  "layout": {
+    "spacing_scale": "Generous. Use p-12, p-24, p-32 for section padding.",
+    "container_width": "max-w-7xl mx-auto",
+    "grid_system": "Bento Grid (Mode A) for products. Asymmetric 'Tetris' grid for Marketing.",
+    "border_radius": "rounded-none (Sharp) or rounded-sm (2px) for a 'Trade/Logistics' feel. Avoid fully rounded corners unless for buttons."
+  },
+  "motion": {
+    "libraries": [
+      "framer-motion",
+      "lenis (Smooth Scrolling - MANDATORY)"
+    ],
+    "guidelines": [
+      "Parallax: Use `useScroll` and `useTransform` for background images.",
+      "Text Reveal: Staggered fade-up for all headings.",
+      "Hover: Slow, elegant scales (duration: 0.5s). No snappy/jerky movements.",
+      "Scroll: Lenis integration for 'heavy' luxurious scroll feel."
+    ]
+  },
+  "components": {
+    "hero_section": {
+      "type": "Parallax Cover",
+      "visuals": "Full-screen background image (darkened with overlay) + Centered Elegant Typography.",
+      "interaction": "Slow drift on scroll."
+    },
+    "product_grid": {
+      "type": "Bento Grid",
+      "style": "Sharp edges, minimal borders, large images, small text labels.",
+      "hover": "Image zoom-in inside container."
+    },
+    "sustainability_strip": {
+      "type": "Marquee / Horizontal Scroll",
+      "style": "Olive background, White text. Infinite scroll of certifications (GOTS, Oeko-Tex)."
+    },
+    "contact_form": {
+      "type": "Shadcn Form (Customized)",
+      "style": "Transparent inputs with bottom border only (Line style). No boxy inputs."
+    }
+  },
+  "media": {
+    "image_urls": {
+      "hero_texture": "https://images.unsplash.com/photo-1618434958571-459c9c972ae8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHw0fHxiZWlnZSUyMGxpbmVuJTIwZmFicmljJTIwdGV4dHVyZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzcxMDUyNDkwfDA&ixlib=rb-4.1.0&q=85",
+      "craftsmanship": "https://images.unsplash.com/photo-1762186540868-a7f3328c161d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd2VhdmVyJTIwaGFuZHMlMjB3b3JraW5nJTIwb24lMjBsb29tfGVufDB8fHx8MTc3MTA1MjQ4Mnww&ixlib=rb-4.1.0&q=85",
+      "weaving_hands": "https://images.unsplash.com/photo-1761410200126-b304f013493b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwyfHxhcnRpc2FuJTIwd2VhdmVyJTIwaGFuZHMlMjB3b3JraW5nJTIwb24lMjBsb29tfGVufDB8fHx8MTc3MTA1MjQ4Mnww&ixlib=rb-4.1.0&q=85",
+      "bedding_product": "https://images.unsplash.com/photo-1768946131530-358c52c4c42d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB3aGl0ZSUyMGJlZGRpbmclMjBiZWRyb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzcxMDUyNDgyfDA&ixlib=rb-4.1.0&q=85",
+      "bedroom_interior": "https://images.unsplash.com/photo-1766928210452-2470f91bae26?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjB3aGl0ZSUyMGJlZGRpbmclMjBiZWRyb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzcxMDUyNDgyfDA&ixlib=rb-4.1.0&q=85",
+      "shipping_logistics": "https://images.unsplash.com/photo-1763876124444-1cb1c3004693?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxjb250YWluZXIlMjBzaGlwJTIwb2NlYW4lMjB0cmFkZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NzEwNTI0ODN8MA&ixlib=rb-4.1.0&q=85",
+      "cargo_ship": "https://images.unsplash.com/photo-1759250451143-5e5aab37cc14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxjb250YWluZXIlMjBzaGlwJTIwb2NlYW4lMjB0cmFkZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NzEwNTI0ODN8MA&ixlib=rb-4.1.0&q=85",
+      "fabric_stack": "https://images.unsplash.com/photo-1762539747176-5d8f166346de?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwxfHxiZWlnZSUyMGxpbmVuJTIwZmFicmljJTIwdGV4dHVyZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzcxMDUyNDkwfDA&ixlib=rb-4.1.0&q=85",
+      "company_logo": "https://customer-assets.emergentagent.com/job_eco-textiles-hub-1/artifacts/i4cptmgv_WhatsApp%20Image%202026-02-14%20at%2010.19.06.jpeg"
+    },
+    "instructions": "Use 'hero_texture' for parallax backgrounds. Use 'bedding_product' and 'bedroom_interior' for Product Cards. Use 'craftsmanship' for Story/Sustainability. Use 'cargo_ship' for Global Network."
+  },
+  "instructions_to_main_agent": [
+    "INSTALL: `npm install lenis framer-motion` or `yarn add lenis framer-motion` immediately.",
+    "FONTS: Add `<link href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@400;500;700&display=swap' rel='stylesheet'>` to index.html.",
+    "TAILWIND: Extend theme with 'font-serif': ['Cormorant Garamond', 'serif'], 'font-sans': ['Manrope', 'sans-serif'].",
+    "LAYOUT: Do not use standard Shadcn Cards for the Product Grid. Build custom Grid Items with aspect-ratio styling.",
+    "NAV: Create a 'Glassmorphic' sticky navbar that condenses on scroll.",
+    "EMAILJS: Integrate contact form with EmailJS (Service ID: mock_service, Template ID: mock_template).",
+    "ACCESSIBILITY: Ensure text contrast on images (use dark overlays or text-shadows)."
+  ],
+  "universal_guidelines": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: `transition: all`.",
+    "You MUST NOT center align the app container, ie do not add `.App { text-align: center; }` in the css file.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute."
+  ]
+}
