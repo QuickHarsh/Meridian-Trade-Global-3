@@ -8,6 +8,7 @@ export function AnimatedSection({ children, className = '', delay = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      style={{ willChange: 'transform, opacity' }}
       className={className}
     >
       {children}
@@ -27,7 +28,7 @@ export function PageHero({ image, title, subtitle, children, height = 'h-[80vh]'
   return (
     <section ref={ref} className={`relative ${height} overflow-hidden`}>
       <motion.div
-        style={{ y }}
+        style={{ y, willChange: 'transform' }}
         className="absolute inset-0 -top-[15%] h-[130%] parallax-img"
       >
         <img
@@ -38,7 +39,7 @@ export function PageHero({ image, title, subtitle, children, height = 'h-[80vh]'
         <div className="absolute inset-0 bg-charcoal/55" />
       </motion.div>
       <motion.div
-        style={{ opacity }}
+        style={{ opacity, willChange: 'opacity' }}
         className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6"
       >
         <motion.span
@@ -84,7 +85,7 @@ export function ParallaxImage({ src, alt, className = '', speed = 0.3 }) {
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
       <motion.img
-        style={{ y }}
+        style={{ y, willChange: 'transform' }}
         src={src}
         alt={alt}
         className="w-full h-[120%] object-cover"
@@ -118,6 +119,7 @@ export function StaggerItem({ children, className = '' }) {
         hidden: { opacity: 0, y: 30 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
       }}
+      style={{ willChange: 'transform, opacity' }}
       className={className}
     >
       {children}

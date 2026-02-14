@@ -8,13 +8,13 @@ import { IMAGES, PRODUCTS, SUSTAINABILITY_ITEMS } from '@/lib/constants';
 function HeroSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '35%']);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']); // Reduced parallax depth
+  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]); // Fade out faster
+  // Removed scale animation for performance
 
   return (
     <section ref={ref} data-testid="hero-section" className="relative h-screen overflow-hidden">
-      <motion.div style={{ y, scale }} className="absolute inset-0 -top-[10%] h-[120%] parallax-img">
+      <motion.div style={{ y }} className="absolute inset-0 -top-[10%] h-[120%] parallax-img">
         <img src={IMAGES.heroTexture} alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-charcoal/50" />
       </motion.div>
@@ -33,9 +33,9 @@ function HeroSection() {
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white tracking-tight max-w-5xl leading-[1.05]"
         >
-          Sustainable Textiles.<br />
-          <span className="italic font-normal">Global Reach.</span><br />
-          Timeless Quality.
+          Refined Home Living.<br />
+          <span className="italic font-normal">Responsible Sourcing.</span><br />
+          Global Scale.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ function HeroSection() {
           transition={{ duration: 1, delay: 0.8 }}
           className="font-sans text-base text-white/65 mt-10 max-w-xl leading-relaxed"
         >
-          Premium eco-conscious home textiles sourced responsibly and delivered globally for retailers, hospitality groups, and sustainability-driven brands.
+          Your premier partner for ethically sourced bedding, bath, and living textiles. Serving retailers, hospitality groups, and brands worldwide.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -84,19 +84,19 @@ function BrandIntro() {
     <section className="py-24 lg:py-32 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         <AnimatedSection>
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Who We Are</span>
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Global Sourcing Partner</span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-tight leading-[1.15]">
-            A Sourcing Studio Built on Craft & Conscience
+            A Sourcing Studio Built for Scale & Conscience
           </h2>
           <p className="font-sans text-base text-charcoal/60 mt-8 leading-relaxed max-w-lg">
-            Meridian Trade Global connects discerning retailers and hospitality brands with ethically sourced, premium home textiles. We bridge artisan craftsmanship with global supply chain capability, delivering collections that honor both tradition and environmental responsibility.
+            Meridian Trade Global acts as an extension of your procurement team. We connect discerning retailers and hospitality brands with ethically sourced, premium home textiles. By bridging artisan craftsmanship with industrial capability, we deliver collections that honor tradition while meeting the rigorous demands of global supply chains.
           </p>
           <Link
             to="/about"
             data-testid="brand-intro-link"
             className="inline-flex items-center gap-2 font-sans text-sm text-clay mt-8 hover:gap-3 transition-all duration-300"
           >
-            Learn More About Us <ArrowRight size={14} />
+            Our Corporate Profile <ArrowRight size={14} />
           </Link>
         </AnimatedSection>
         <AnimatedSection delay={0.2}>
@@ -117,6 +117,46 @@ function BrandIntro() {
   );
 }
 
+function CollectionCard({ product, className }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Internal parallax effect - image moves slightly slower than scroll
+  const y = useTransform(scrollYProgress, [0, 1], ["-15%", "15%"]);
+
+  return (
+    <Link
+      to="/products"
+      ref={ref}
+      data-testid={`product-tile-${product.id}`}
+      className={`group block relative overflow-hidden aspect-[4/5] ${className}`}
+    >
+      <motion.div
+        style={{ y, height: "130%", top: "-15%", willChange: "transform" }}
+        className="absolute inset-x-0 w-full"
+      >
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-60" />
+      <div className="absolute bottom-0 left-0 right-0 p-8 transform transition-transform duration-500 group-hover:-translate-y-2">
+        <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/50 block mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 transform translate-y-2 group-hover:translate-y-0">{product.materials[0]}</span>
+        <h3 className="font-serif text-3xl text-white mb-2">{product.name}</h3>
+        <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
+          <p className="font-sans text-sm text-white/70 line-clamp-2 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">{product.tagline}</p>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 function ProductGrid() {
   return (
     <section className="py-24 lg:py-32 px-6 lg:px-8 bg-white">
@@ -127,27 +167,10 @@ function ProductGrid() {
             Curated for Conscious Commerce
           </h2>
         </AnimatedSection>
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PRODUCTS.map((product, i) => (
             <StaggerItem key={product.id} className={i === 0 || i === 3 ? 'md:col-span-2 lg:col-span-1' : ''}>
-              <Link
-                to="/products"
-                data-testid={`product-tile-${product.id}`}
-                className="group block relative overflow-hidden aspect-[4/5]"
-              >
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/50 block mb-2">{product.materials[0]}</span>
-                  <h3 className="font-serif text-2xl text-white">{product.name}</h3>
-                  <p className="font-sans text-sm text-white/60 mt-2 line-clamp-2">{product.tagline}</p>
-                </div>
-              </Link>
+              <CollectionCard product={product} />
             </StaggerItem>
           ))}
         </StaggerContainer>
@@ -175,7 +198,7 @@ function SustainabilityStrip() {
 function GlobalSection() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+  const imgY = useTransform(scrollYProgress, [0, 1], ['5%', '-5%']); // Reduced parallax depth
 
   return (
     <section ref={ref} className="py-24 lg:py-32 px-6 lg:px-8">
@@ -257,7 +280,7 @@ function TrustIndicators() {
 function FinalCTA() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%']); // Reduced parallax depth
 
   return (
     <section ref={ref} data-testid="final-cta" className="relative h-[60vh] lg:h-[70vh] overflow-hidden">
@@ -268,14 +291,14 @@ function FinalCTA() {
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <AnimatedSection>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.1]">
-            Let's Build Responsible Supply Together.
+            Let's Build a Responsible Supply Chain Together.
           </h2>
           <Link
             to="/contact"
             data-testid="final-cta-btn"
             className="inline-flex items-center gap-2 mt-10 px-8 py-4 bg-clay text-white font-sans text-sm tracking-wide hover:bg-clay/90 transition-colors duration-300"
           >
-            Request Partnership Discussion <ArrowRight size={16} />
+            Initiate Partnership Discussion <ArrowRight size={16} />
           </Link>
         </AnimatedSection>
       </div>
