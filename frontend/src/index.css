@@ -36,11 +36,16 @@
     * {
         @apply border-border;
     }
+
     body {
         @apply bg-ivory text-charcoal font-sans antialiased;
         margin: 0;
     }
-    h1, h2, h3, h4 {
+
+    h1,
+    h2,
+    h3,
+    h4 {
         @apply font-serif;
     }
 }
@@ -49,7 +54,8 @@
     [data-debug-wrapper="true"] {
         display: contents !important;
     }
-    [data-debug-wrapper="true"] > * {
+
+    [data-debug-wrapper="true"]>* {
         margin-left: inherit;
         margin-right: inherit;
         margin-top: inherit;
@@ -79,4 +85,18 @@
 ::selection {
     background-color: #B46A4D;
     color: white;
+}
+
+@keyframes shine {
+    0% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: -100%;
+    }
+}
+
+.animate-shine {
+    animation: shine 5s linear infinite;
 }

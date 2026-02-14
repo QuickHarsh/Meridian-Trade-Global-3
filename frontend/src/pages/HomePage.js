@@ -4,76 +4,114 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Leaf, Shield, Globe, Award } from 'lucide-react';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/AnimatedSection';
 import { IMAGES, PRODUCTS, SUSTAINABILITY_ITEMS } from '@/lib/constants';
+import { SplitText } from '@/components/reactbits/SplitText';
+import { BlurText } from '@/components/reactbits/BlurText';
+import { Magnet } from '@/components/reactbits/Magnet';
+import { SpotlightCard } from '@/components/reactbits/SpotlightCard';
+import { DecryptedText } from '@/components/reactbits/DecryptedText';
+import { ShinyText } from '@/components/reactbits/ShinyText';
 
 function HeroSection() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '20%']); // Reduced parallax depth
-  const textOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]); // Fade out faster
-  // Removed scale animation for performance
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 1000], [0, 400]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
   return (
-    <section ref={ref} data-testid="hero-section" className="relative h-screen overflow-hidden">
-      <motion.div style={{ y }} className="absolute inset-0 -top-[10%] h-[120%] parallax-img">
-        <img src={IMAGES.heroTexture} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-charcoal/50" />
+    <section ref={ref} data-testid="hero-section" className="relative h-screen bg-charcoal overflow-hidden flex items-center justify-center">
+      {/* Dynamic Background Blobs */}
+      <div className="absolute top-0 -left-4 w-96 h-96 bg-vibrant-purple/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob" />
+      <div className="absolute top-0 -right-4 w-96 h-96 bg-vibrant-blue/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000" />
+      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-vibrant-green/30 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000" />
+
+      <motion.div style={{ y, opacity }} className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-charcoal z-10" />
+        <img src={IMAGES.heroTexture} alt="" className="w-full h-full object-cover opacity-60" />
       </motion.div>
-      <motion.div style={{ opacity: textOpacity }} className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-sans text-xs uppercase tracking-[0.35em] text-white/50 mb-8"
-        >
-          The Marketplace For Responsible Sourcing
-        </motion.span>
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="font-serif text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-white tracking-tight max-w-5xl leading-[1.05]"
-        >
-          Refined Home Living.<br />
-          <span className="italic font-normal">Responsible Sourcing.</span><br />
-          Global Scale.
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="font-sans text-base text-white/65 mt-10 max-w-xl leading-relaxed"
-        >
-          Your premier partner for ethically sourced bedding, bath, and living textiles. Serving retailers, hospitality groups, and brands worldwide.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.1 }}
-          className="flex flex-col sm:flex-row gap-4 mt-12"
-        >
-          <Link
-            to="/products"
-            data-testid="hero-explore-cta"
-            className="px-8 py-3.5 bg-clay text-white font-sans text-sm tracking-wide hover:bg-clay/90 transition-colors duration-300 flex items-center gap-2"
-          >
-            Explore Our Collections <ArrowRight size={16} />
-          </Link>
-          <Link
-            to="/contact"
-            data-testid="hero-partner-cta"
-            className="px-8 py-3.5 border border-white/30 text-white font-sans text-sm tracking-wide hover:bg-white/10 transition-colors duration-300"
-          >
-            Partner With Us
-          </Link>
-        </motion.div>
-      </motion.div>
+
+      <div className="relative z-10 max-w-[90vw] lg:max-w-7xl mx-auto px-6 text-center">
+        <StaggerContainer>
+          <div className="mb-8 flex justify-center">
+            <AnimatedSection className="inline-block px-4 py-1.5 border border-white/20 rounded-full backdrop-blur-md bg-white/5">
+              <span className="font-sans text-[10px] uppercase tracking-[0.2em] text-white/80">
+                The Marketplace For Responsible Sourcing
+              </span>
+            </AnimatedSection>
+          </div>
+
+          <div className="overflow-hidden mb-8">
+            <SplitText
+              text="Refined Home Living."
+              className="font-serif text-4xl sm:text-6xl lg:text-8xl text-white tracking-tight block leading-[1.1]"
+              delay={40}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              threshold={0.1}
+              textAlign="center"
+            />
+            <SplitText
+              text="Responsible Sourcing."
+              className="font-serif text-4xl sm:text-6xl lg:text-8xl text-gold tracking-tight block leading-[1.1] italic"
+              delay={40}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              threshold={0.1}
+              textAlign="center"
+            />
+            <SplitText
+              text="Global Scale."
+              className="font-serif text-4xl sm:text-6xl lg:text-8xl text-white tracking-tight block leading-[1.1]"
+              delay={40}
+              animationFrom={{ opacity: 0, transform: 'translate3d(0,50px,0)' }}
+              animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+              threshold={0.1}
+              textAlign="center"
+            />
+          </div>
+
+          <div className="flex justify-center mb-12">
+            <BlurText
+              text="Your premier partner for ethically sourced bedding, bath, and living textiles. Serving retailers, hospitality groups, and brands worldwide."
+              className="font-sans text-base sm:text-lg text-white/70 max-w-2xl leading-relaxed"
+              delay={10}
+              animateBy="words"
+              direction="bottom"
+              threshold={0.2}
+            />
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <Magnet padding={50} magnetStrength={3}>
+              <Link
+                to="/products"
+                data-testid="hero-explore-cta"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-clay text-white rounded-full font-sans text-xs font-semibold uppercase tracking-wider transition-all hover:bg-clay/90"
+              >
+                Explore Collections
+                <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Magnet>
+
+            <Magnet padding={50} magnetStrength={3}>
+              <Link
+                to="/contact"
+                data-testid="hero-partner-cta"
+                className="group inline-flex items-center gap-3 px-8 py-4 border border-white/30 text-white rounded-full font-sans text-xs font-semibold uppercase tracking-wider transition-all hover:bg-white/10 hover:border-white"
+              >
+                Partner With Us
+              </Link>
+            </Magnet>
+          </div>
+        </StaggerContainer>
+      </div>
+
+      {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        style={{ opacity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 flex flex-col items-center gap-2"
       >
-        <div className="w-[1px] h-12 bg-white/30 mx-auto animate-pulse" />
+        <span className="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
+        <div className="w-[1px] h-12 bg-gradient-to-b from-white/30 to-transparent" />
       </motion.div>
     </section>
   );
@@ -81,37 +119,45 @@ function HeroSection() {
 
 function BrandIntro() {
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <section className="py-24 lg:py-40 px-6 lg:px-8 bg-soft-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <AnimatedSection>
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Global Sourcing Partner</span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-tight leading-[1.15]">
-            A Sourcing Studio Built for Scale & Conscience
-          </h2>
-          <p className="font-sans text-base text-charcoal/60 mt-8 leading-relaxed max-w-lg">
-            Meridian Trade Global acts as an extension of your procurement team. We connect discerning retailers and hospitality brands with ethically sourced, premium home textiles. By bridging artisan craftsmanship with industrial capability, we deliver collections that honor tradition while meeting the rigorous demands of global supply chains.
-          </p>
-          <Link
-            to="/about"
-            data-testid="brand-intro-link"
-            className="inline-flex items-center gap-2 font-sans text-sm text-clay mt-8 hover:gap-3 transition-all duration-300"
-          >
-            Our Corporate Profile <ArrowRight size={14} />
-          </Link>
+          <img
+            src={IMAGES.craftsmanship}
+            alt="Textile Loom"
+            className="w-full h-[600px] object-cover rounded-2xl opacity-80 shadow-2xl"
+          />
         </AnimatedSection>
-        <AnimatedSection delay={0.2}>
-          <div className="relative img-zoom">
-            <img
-              src={IMAGES.craftsmanship}
-              alt="Artisan weaving on traditional loom"
-              className="w-full aspect-[4/5] object-cover"
-              loading="lazy"
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-charcoal/60 to-transparent">
-              <span className="font-sans text-xs uppercase tracking-[0.2em] text-white/70">Artisan Heritage</span>
-            </div>
+        <div className="max-w-xl">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-6 block">Global Sourcing Partner</span>
+          <SplitText
+            text="A Sourcing Studio Built for Scale & Conscience"
+            className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-tight leading-[1.15] mb-8"
+            delay={30}
+            animationFrom={{ opacity: 0, transform: 'translate3d(0,20px,0)' }}
+            animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+            threshold={0.4}
+            textAlign="left"
+          />
+          <BlurText
+            text="Meridian Trade Global acts as an extension of your procurement team. We connect discerning retailers and hospitality brands with ethically sourced, premium home textiles. By bridging artisan craftsmanship with industrial capability, we deliver collections that honor tradition while meeting the rigorous demands of global supply chains."
+            className="font-sans text-base text-charcoal/60 leading-relaxed"
+            delay={5}
+            animateBy="words"
+            direction="bottom"
+            threshold={0.4}
+          />
+
+          <div className="mt-10">
+            <Link
+              to="/about"
+              data-testid="brand-intro-link"
+              className="inline-flex items-center gap-2 font-sans text-sm font-semibold text-clay hover:gap-3 transition-all duration-300 uppercase tracking-wider"
+            >
+              Our Corporate Profile <ArrowRight size={14} />
+            </Link>
           </div>
-        </AnimatedSection>
+        </div>
       </div>
     </section>
   );
@@ -157,23 +203,31 @@ function CollectionCard({ product, className }) {
   );
 }
 
+import { CircularGallery } from '@/components/CircularGallery';
+
 function ProductGrid() {
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection className="mb-16">
+    <section className="py-24 lg:py-32 px-4 bg-charcoal relative overflow-hidden">
+      {/* Ambient Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-clay/20 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="w-full relative z-10">
+        <AnimatedSection className="mb-10 text-center">
           <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Our Collections</span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
             Curated for Conscious Commerce
           </h2>
+          <p className="font-sans text-white/50 mt-4 text-sm">Drag to explore our global portfolio</p>
         </AnimatedSection>
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PRODUCTS.map((product, i) => (
-            <StaggerItem key={product.id} className={i === 0 || i === 3 ? 'md:col-span-2 lg:col-span-1' : ''}>
-              <CollectionCard product={product} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+
+        <div className="w-full h-[600px]">
+          <CircularGallery
+            items={PRODUCTS}
+            bend={2}
+            textColor="#ffffff"
+            borderRadius={0.05}
+          />
+        </div>
       </div>
     </section>
   );
@@ -182,11 +236,12 @@ function ProductGrid() {
 function SustainabilityStrip() {
   const items = [...SUSTAINABILITY_ITEMS, ...SUSTAINABILITY_ITEMS, ...SUSTAINABILITY_ITEMS];
   return (
-    <section data-testid="sustainability-strip" className="py-6 bg-olive overflow-hidden">
-      <div className="flex animate-marquee whitespace-nowrap">
+    <section data-testid="sustainability-strip" className="py-6 bg-vibrant-green overflow-hidden relative">
+      <div className="absolute inset-0 bg-black/10 mix-blend-overlay" />
+      <div className="flex animate-marquee whitespace-nowrap relative z-10">
         {items.map((item, i) => (
-          <span key={i} className="mx-8 lg:mx-12 font-sans text-xs uppercase tracking-[0.25em] text-white/80 flex items-center gap-3">
-            <Leaf size={12} className="text-white/50 shrink-0" />
+          <span key={i} className="mx-8 lg:mx-12 font-sans text-xs uppercase tracking-[0.25em] text-white flex items-center gap-3 font-semibold">
+            <Leaf size={14} className="text-white shrink-0" fill="currentColor" />
             {item}
           </span>
         ))}
@@ -203,7 +258,7 @@ function GlobalSection() {
   return (
     <section ref={ref} className="py-24 lg:py-32 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="relative overflow-hidden aspect-[4/3] order-2 lg:order-1">
+        <div className="relative overflow-hidden aspect-[4/3] order-2 lg:order-1 rounded-2xl shadow-2xl">
           <motion.img
             style={{ y: imgY }}
             src={IMAGES.shippingLogistics}
@@ -212,34 +267,48 @@ function GlobalSection() {
             loading="lazy"
           />
         </div>
-        <AnimatedSection className="order-1 lg:order-2">
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Global Reach</span>
+        <AnimatedSection className="order-1 lg:order-2 relative">
+          {/* Ambient Blob */}
+          <div className="absolute -z-10 top-1/2 right-0 w-80 h-80 bg-vibrant-blue/10 rounded-full filter blur-[100px] opacity-60 pointer-events-none" />
+
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-vibrant-blue mb-4 block font-bold">Global Reach</span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-charcoal tracking-tight leading-[1.15]">
-            Built on Responsible Global Sourcing
+            Built on <span className="text-vibrant-blue">Responsible</span> Global Sourcing
           </h2>
           <p className="font-sans text-base text-charcoal/60 mt-8 leading-relaxed">
             From the loom to the loading dock, every step in our supply chain is structured for quality, compliance, and environmental accountability. We source across established regions, manage logistics with precision, and deliver with the reliability that global partners demand.
           </p>
-          <div className="grid grid-cols-2 gap-6 mt-10">
+          <div className="grid grid-cols-2 gap-4 mt-10">
             {[
-              { num: '15+', label: 'Sourcing Regions' },
-              { num: '40+', label: 'Export Destinations' },
-              { num: '100%', label: 'Quality Inspected' },
-              { num: '10+', label: 'Years Experience' },
+              { num: '15+', label: 'Sourcing Regions', color: '#2E5CFF' }, // Blue
+              { num: '40+', label: 'Export Destinations', color: '#00D26A' }, // Green
+              { num: '100%', label: 'Quality Inspected', color: '#FF725E' }, // Orange
+              { num: '10+', label: 'Years Experience', color: '#6200EA' }, // Purple
             ].map(stat => (
-              <div key={stat.label}>
-                <span className="font-serif text-3xl text-clay">{stat.num}</span>
-                <p className="font-sans text-xs text-charcoal/50 mt-1 uppercase tracking-wide">{stat.label}</p>
-              </div>
+              <SpotlightCard key={stat.label} className="bg-white border-sand/40 hover:border-clay/20 p-6" spotlightColor={`${stat.color}20`}>
+                <div className="font-serif text-3xl flex items-center mb-1" style={{ color: stat.color }}>
+                  <DecryptedText
+                    text={stat.num}
+                    speed={80}
+                    maxIterations={15}
+                    className=""
+                  />
+                </div>
+                <p className="font-sans text-[10px] text-charcoal/50 uppercase tracking-widest">{stat.label}</p>
+              </SpotlightCard>
             ))}
           </div>
-          <Link
-            to="/global-network"
-            data-testid="global-section-link"
-            className="inline-flex items-center gap-2 font-sans text-sm text-clay mt-10 hover:gap-3 transition-all duration-300"
-          >
-            Explore Our Network <ArrowRight size={14} />
-          </Link>
+          <div className="mt-10">
+            <Magnet padding={40} magnetStrength={3}>
+              <Link
+                to="/global-network"
+                data-testid="global-section-link"
+                className="inline-flex items-center gap-2 font-sans text-sm text-clay hover:gap-3 transition-all duration-300 cursor-pointer"
+              >
+                Explore Our Network <ArrowRight size={14} />
+              </Link>
+            </Magnet>
+          </div>
         </AnimatedSection>
       </div>
     </section>
@@ -248,27 +317,35 @@ function GlobalSection() {
 
 function TrustIndicators() {
   const indicators = [
-    { icon: Award, title: 'GOTS Certified', desc: 'Global Organic Textile Standard compliance across our supply chain' },
-    { icon: Shield, title: 'Quality Assured', desc: 'Multi-point inspection framework from fiber to finished product' },
-    { icon: Globe, title: 'Export Expertise', desc: 'Proven international trade documentation and compliance systems' },
-    { icon: Leaf, title: 'Eco-Responsible', desc: 'Natural dyes, responsible sourcing, and traceable supply chains' },
+    { icon: Award, title: 'GOTS Certified', desc: 'Global Organic Textile Standard compliance across our supply chain', color: '#00D26A' },
+    { icon: Shield, title: 'Quality Assured', desc: 'Multi-point inspection framework from fiber to finished product', color: '#FF725E' },
+    { icon: Globe, title: 'Export Expertise', desc: 'Proven international trade documentation and compliance systems', color: '#2E5CFF' },
+    { icon: Leaf, title: 'Eco-Responsible', desc: 'Natural dyes, responsible sourcing, and traceable supply chains', color: '#6200EA' },
   ];
 
   return (
-    <section className="py-24 lg:py-32 px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 lg:py-32 px-6 lg:px-8 bg-charcoal relative overflow-hidden">
+      {/* Ambient Blob */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-vibrant-purple/10 rounded-full filter blur-[100px] animate-blob" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-vibrant-orange/10 rounded-full filter blur-[100px] animate-blob animation-delay-2000" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
         <AnimatedSection className="text-center mb-16">
-          <span className="font-sans text-xs uppercase tracking-[0.2em] text-olive mb-4 block">Trust & Credentials</span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-charcoal tracking-tight">
+          <span className="font-sans text-xs uppercase tracking-[0.2em] text-vibrant-green mb-4 block font-bold">Trust & Credentials</span>
+          <h2 className="font-serif text-3xl sm:text-4xl text-white tracking-tight">
             Standards That Define Our Practice
           </h2>
         </AnimatedSection>
-        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {indicators.map(item => (
-            <StaggerItem key={item.title} className="p-8 border border-sand/60 hover:border-clay/30 transition-colors duration-500">
-              <item.icon size={24} className="text-olive mb-6" strokeWidth={1.5} />
-              <h3 className="font-serif text-xl text-charcoal mb-3">{item.title}</h3>
-              <p className="font-sans text-sm text-charcoal/50 leading-relaxed">{item.desc}</p>
+            <StaggerItem key={item.title}>
+              <SpotlightCard className="h-full border-white/10 bg-white/5 hover:bg-white/10 transition-colors" spotlightColor={`${item.color}40`}>
+                <item.icon size={24} className="mb-6 transition-colors duration-300" style={{ color: item.color }} strokeWidth={1.5} />
+                <h3 className="font-serif text-xl text-white mb-3">{item.title}</h3>
+                <p className="font-sans text-sm text-white/50 leading-relaxed">{item.desc}</p>
+              </SpotlightCard>
             </StaggerItem>
           ))}
         </StaggerContainer>
@@ -278,29 +355,31 @@ function TrustIndicators() {
 }
 
 function FinalCTA() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '10%']); // Reduced parallax depth
-
   return (
-    <section ref={ref} data-testid="final-cta" className="relative h-[60vh] lg:h-[70vh] overflow-hidden">
-      <motion.div style={{ y }} className="absolute inset-0 -top-[10%] h-[130%]">
-        <img src={IMAGES.fabricStack} alt="" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-charcoal/60" />
-      </motion.div>
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
-        <AnimatedSection>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-6xl text-white tracking-tight max-w-3xl leading-[1.1]">
-            Let's Build a Responsible Supply Chain Together.
-          </h2>
-          <Link
-            to="/contact"
-            data-testid="final-cta-btn"
-            className="inline-flex items-center gap-2 mt-10 px-8 py-4 bg-clay text-white font-sans text-sm tracking-wide hover:bg-clay/90 transition-colors duration-300"
-          >
-            Initiate Partnership Discussion <ArrowRight size={16} />
-          </Link>
-        </AnimatedSection>
+    <section data-testid="final-cta" className="py-24 lg:py-32 px-6 lg:px-8 bg-olive overflow-hidden relative">
+      <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+      <div className="max-w-4xl mx-auto text-center relative z-10">
+        <SplitText
+          text="Let's Build a Responsible Supply Chain Together."
+          className="font-serif text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]"
+          delay={40}
+          animationFrom={{ opacity: 0, transform: 'translate3d(0,40px,0)' }}
+          animationTo={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
+          threshold={0.4}
+          textAlign="center"
+        />
+
+        <div className="mt-12 flex justify-center">
+          <Magnet padding={80} magnetStrength={5}>
+            <Link
+              to="/contact"
+              data-testid="final-cta-btn"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-clay text-white font-sans text-sm font-semibold uppercase tracking-widest shadow-2xl hover:bg-clay/90 transition-all rounded-sm"
+            >
+              Initiate Partnership Discussion <ArrowRight size={16} />
+            </Link>
+          </Magnet>
+        </div>
       </div>
     </section>
   );

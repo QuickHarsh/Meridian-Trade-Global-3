@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { IMAGES, NAV_LINKS } from '@/lib/constants';
+import { Magnet } from '@/components/reactbits/Magnet';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -19,17 +20,16 @@ export default function Navbar() {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const isHome = location.pathname === '/';
-  const showLight = !scrolled && isHome;
+  // Assume all pages start with a dark hero section for now
+  const showLight = !scrolled;
 
   return (
     <nav
       data-testid="main-navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-ivory/92 backdrop-blur-2xl shadow-[0_1px_0_0_rgba(216,207,196,0.5)]'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${scrolled
+          ? 'bg-ivory/95 backdrop-blur-md shadow-sm border-sand/50'
+          : 'bg-transparent backdrop-blur-[2px] border-white/5'
+        }`}
     >
       <div className={`max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-500 ${scrolled ? 'py-3' : 'py-5'}`}>
         <Link to="/" data-testid="nav-logo" className="flex items-center gap-3 shrink-0">
@@ -42,28 +42,30 @@ export default function Navbar() {
 
         <div className="hidden lg:flex items-center gap-7">
           {NAV_LINKS.filter(l => l.path !== '/').map(link => (
-            <Link
-              key={link.path}
-              to={link.path}
-              data-testid={`nav-link-${link.path.slice(1)}`}
-              className={`font-sans text-[13px] tracking-wide transition-colors duration-300 ${
-                location.pathname === link.path
-                  ? 'text-clay'
-                  : showLight
-                    ? 'text-white/90 hover:text-white'
-                    : 'text-charcoal/70 hover:text-charcoal'
-              }`}
-            >
-              {link.label}
-            </Link>
+            <Magnet key={link.path} padding={20} magnetStrength={2}>
+              <Link
+                to={link.path}
+                data-testid={`nav-link-${link.path.slice(1)}`}
+                className={`font-sans text-[13px] tracking-wide transition-colors duration-300 block py-2 ${location.pathname === link.path
+                    ? 'text-clay'
+                    : showLight
+                      ? 'text-white/90 hover:text-white'
+                      : 'text-charcoal/70 hover:text-charcoal'
+                  }`}
+              >
+                {link.label}
+              </Link>
+            </Magnet>
           ))}
-          <Link
-            to="/contact"
-            data-testid="nav-partner-cta"
-            className="ml-2 px-5 py-2 bg-clay text-white font-sans text-[13px] tracking-wide hover:bg-clay/90 transition-colors duration-300"
-          >
-            Partner With Us
-          </Link>
+          <Magnet padding={30} magnetStrength={3}>
+            <Link
+              to="/contact"
+              data-testid="nav-partner-cta"
+              className="ml-2 px-5 py-2 bg-clay text-white font-sans text-[13px] tracking-wide hover:bg-clay/90 transition-colors duration-300 rounded-sm"
+            >
+              Partner With Us
+            </Link>
+          </Magnet>
         </div>
 
         <button
@@ -95,9 +97,8 @@ export default function Navbar() {
                   key={link.path}
                   to={link.path}
                   data-testid={`mobile-nav-${link.path.slice(1) || 'home'}`}
-                  className={`font-sans text-sm tracking-wide py-3 border-b border-sand/30 ${
-                    location.pathname === link.path ? 'text-clay' : 'text-charcoal'
-                  }`}
+                  className={`font-sans text-sm tracking-wide py-3 border-b border-sand/30 ${location.pathname === link.path ? 'text-clay' : 'text-charcoal'
+                    }`}
                 >
                   {link.label}
                 </Link>
