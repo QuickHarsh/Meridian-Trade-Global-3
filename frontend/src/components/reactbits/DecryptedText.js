@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -34,49 +34,11 @@ export const DecryptedText = ({
     const revealedIndices = useRef(new Set());
     const iterationCount = useRef(0);
     const intervalRef = useRef(null);
+    const containerRef = useRef(null);
 
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
 
-    useEffect(() => {
-        let interval;
-        if (animateOn === 'view') {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        setIsScrambling(true);
-                        observer.disconnect();
-                    }
-                },
-                { threshold: 0.1 }
-            );
-            // This assumes the parent renders usually, but for a hook we'd need a ref to the element.
-            // For now, we'll just trigger it immediately if not using a specific ref, or handled via proper structured ref in a simpler way:
-            // Let's rely on the parent wrapper's ref for intersection if possible, or just start it.
-            // Actually, let's keep it simple: if 'view', we trigger scramble on mount/hover logic is separate.
-        }
-    }, [animateOn]);
-
-    // Handle 'view' trigger via simple effect for now, though intersection observer is better inside the component
-    const containerRef = useRef(null);
-
-    useEffect(() => {
-        if (animateOn === 'view') {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting && !intervalRef.current) {
-                        startScramble();
-                    }
-                },
-                { threshold: 0.1 }
-            );
-            if (containerRef.current) {
-                observer.observe(containerRef.current);
-            }
-            return () => observer.disconnect();
-        }
-    }, [animateOn, text]);
-
-    const startScramble = () => {
+    const startScramble = useCallback(() => {
         clearInterval(intervalRef.current);
         revealedIndices.current.clear();
         iterationCount.current = 0;
@@ -132,13 +94,30 @@ export const DecryptedText = ({
                 return newText;
             });
         }, speed);
-    };
+    }, [text, speed, maxIterations, sequential, revealDirection, useOriginalCharsOnly, characters]);
+
+    useEffect(() => {
+        if (animateOn === 'view') {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if (entry.isIntersecting && !intervalRef.current) {
+                        startScramble();
+                    }
+                },
+                { threshold: 0.1 }
+            );
+            if (containerRef.current) {
+                observer.observe(containerRef.current);
+            }
+            return () => observer.disconnect();
+        }
+    }, [animateOn, startScramble]);
 
     const handleMouseEnter = () => {
         if (animateOn === 'hover') {
             startScramble();
         }
-    }
+    };
 
     // Effect to clean up
     useEffect(() => {
