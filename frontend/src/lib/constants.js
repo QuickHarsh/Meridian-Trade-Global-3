@@ -1,0 +1,93 @@
+export const IMAGES = {
+  logo: "https://customer-assets.emergentagent.com/job_eco-textiles-hub-1/artifacts/i4cptmgv_WhatsApp%20Image%202026-02-14%20at%2010.19.06.jpeg",
+  heroTexture: "https://images.unsplash.com/photo-1618434958571-459c9c972ae8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHw0fHxiZWlnZSUyMGxpbmVuJTIwZmFicmljJTIwdGV4dHVyZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzcxMDUyNDkwfDA&ixlib=rb-4.1.0&q=85",
+  fabricStack: "https://images.unsplash.com/photo-1762539747176-5d8f166346de?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwxfHxiZWlnZSUyMGxpbmVuJTIwZmFicmljJTIwdGV4dHVyZSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzcxMDUyNDkwfDA&ixlib=rb-4.1.0&q=85",
+  craftsmanship: "https://images.unsplash.com/photo-1762186540868-a7f3328c161d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxhcnRpc2FuJTIwd2VhdmVyJTIwaGFuZHMlMjB3b3JraW5nJTIwb24lMjBsb29tfGVufDB8fHx8MTc3MTA1MjQ4Mnww&ixlib=rb-4.1.0&q=85",
+  weavingHands: "https://images.unsplash.com/photo-1761410200126-b304f013493b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwyfHxhcnRpc2FuJTIwd2VhdmVyJTIwaGFuZHMlMjB3b3JraW5nJTIwb24lMjBsb29tfGVufDB8fHx8MTc3MTA1MjQ4Mnww&ixlib=rb-4.1.0&q=85",
+  beddingProduct: "https://images.unsplash.com/photo-1768946131530-358c52c4c42d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjB3aGl0ZSUyMGJlZGRpbmclMjBiZWRyb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzcxMDUyNDgyfDA&ixlib=rb-4.1.0&q=85",
+  bedroomInterior: "https://images.unsplash.com/photo-1766928210452-2470f91bae26?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxsdXh1cnklMjB3aGl0ZSUyMGJlZGRpbmclMjBiZWRyb29tJTIwaW50ZXJpb3J8ZW58MHx8fHwxNzcxMDUyNDgyfDA&ixlib=rb-4.1.0&q=85",
+  shippingLogistics: "https://images.unsplash.com/photo-1763876124444-1cb1c3004693?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxjb250YWluZXIlMjBzaGlwJTIwb2NlYW4lMjB0cmFkZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NzEwNTI0ODN8MA&ixlib=rb-4.1.0&q=85",
+  cargoShip: "https://images.unsplash.com/photo-1759250451143-5e5aab37cc14?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxjb250YWluZXIlMjBzaGlwJTIwb2NlYW4lMjB0cmFkZSUyMGxvZ2lzdGljc3xlbnwwfHx8fDE3NzEwNTI0ODN8MA&ixlib=rb-4.1.0&q=85",
+  tableLinens: "https://images.unsplash.com/photo-1762220298545-865e5d3eda5f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwxfHxsaW5lbiUyMHRhYmxlJTIwc2V0dGluZyUyMGVsZWdhbnQlMjBkaW5pbmd8ZW58MHx8fHwxNzcxMDUyNjIxfDA&ixlib=rb-4.1.0&q=85",
+  throws: "https://images.unsplash.com/photo-1590674752807-05e0ca142f01?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwyfHxoYW5kd292ZW4lMjB0aHJvdyUyMGJsYW5rZXQlMjB3b29sfGVufDB8fHx8MTc3MTA1MjYyMnww&ixlib=rb-4.1.0&q=85",
+  cushions: "https://images.unsplash.com/photo-1758789870370-a8a323b1b19c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxjdXNoaW9uJTIwcGlsbG93JTIwZW1icm9pZGVyZWQlMjB0ZXh0aWxlfGVufDB8fHx8MTc3MTA1MjYyMnww&ixlib=rb-4.1.0&q=85",
+  bathTowels: "https://images.unsplash.com/photo-1760722974657-f64bce2f9cc5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBiYXRoJTIwdG93ZWxzJTIwb3JnYW5pYyUyMGNvdHRvbnxlbnwwfHx8fDE3NzEwNTI2MjN8MA&ixlib=rb-4.1.0&q=85",
+  floorRug: "https://images.unsplash.com/photo-1726208224138-80303abb73d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxuYXR1cmFsJTIwZmliZXIlMjBydWclMjB3b3ZlbiUyMGZsb29yfGVufDB8fHx8MTc3MTA1MjYyNHww&ixlib=rb-4.1.0&q=85",
+  cottonField: "https://images.unsplash.com/photo-1761069183527-a1a1414ee71f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzOTB8MHwxfHNlYXJjaHwyfHxjb3R0b24lMjBmaWVsZCUyMHN1c3RhaW5hYmxlJTIwYWdyaWN1bHR1cmV8ZW58MHx8fHwxNzcxMDUyNjI0fDA&ixlib=rb-4.1.0&q=85",
+};
+
+export const PRODUCTS = [
+  {
+    id: 'bedding',
+    name: 'Bedding',
+    tagline: 'Organic Cotton & Linen Bedding for Global Retail',
+    image: IMAGES.beddingProduct,
+    materials: ['Organic Cotton', 'Linen', 'Hemp', 'Tencel/Lyocell'],
+    features: ['GOTS Certified', 'Bulk Customization', 'Private Label Capabilities', 'Minimum Order Flexibility'],
+    description: 'Premium bedding collections crafted from certified organic fibers. Designed for retailers and hospitality groups seeking sustainable luxury at scale.',
+  },
+  {
+    id: 'table-linens',
+    name: 'Table Linens',
+    tagline: 'Elegant Table Linens for Hospitality Excellence',
+    image: IMAGES.tableLinens,
+    materials: ['Organic Cotton', 'Linen', 'Banana Fiber', 'Hospitality-Grade Finishing'],
+    features: ['Stain Resistant Options', 'Custom Sizing', 'Bulk Production', 'Brand Embroidery'],
+    description: 'Refined table linens combining natural fibers with hospitality-grade durability. From intimate dining to large-scale hotel supply.',
+  },
+  {
+    id: 'throws-blankets',
+    name: 'Throws & Blankets',
+    tagline: 'Handwoven Throws Rooted in Artisan Tradition',
+    image: IMAGES.throws,
+    materials: ['Wool', 'Organic Cotton', 'Recycled Cotton', 'Handwoven Collections'],
+    features: ['Artisan Crafted', 'Fair Trade Sourced', 'Custom Color Palettes', 'Seasonal Collections'],
+    description: 'Handwoven throws and blankets that carry the warmth of artisan tradition. Each piece supports sustainable livelihoods and responsible material sourcing.',
+  },
+  {
+    id: 'cushions',
+    name: 'Cushions & Pillow Covers',
+    tagline: 'Artisanal Cushions with Hand-Embroidered Detail',
+    image: IMAGES.cushions,
+    materials: ['GOTS-Certified Cotton', 'Peace Silk', 'Hand-Embroidered Detailing', 'Artisanal Collections'],
+    features: ['Custom Designs', 'Heritage Techniques', 'Ethical Sourcing', 'Boutique & Retail Ready'],
+    description: 'Cushion collections featuring hand-embroidered details and peace silk accents. Perfect for retailers seeking distinctive, story-rich home accessories.',
+  },
+  {
+    id: 'bath-textiles',
+    name: 'Bath Textiles',
+    tagline: 'Organic Bath Textiles for Spa & Hospitality',
+    image: IMAGES.bathTowels,
+    materials: ['Organic Cotton Towels', 'Bamboo Bath Mats', 'Hemp Blends', 'Spa-Grade Finishing'],
+    features: ['Quick-Dry Technology', 'Hotel Supply Programs', 'Custom Branding', 'Durability Tested'],
+    description: 'Luxurious bath textiles engineered for comfort and longevity. Ideal for boutique hotels, spas, and premium retail channels.',
+  },
+  {
+    id: 'floor-coverings',
+    name: 'Floor Coverings',
+    tagline: 'Sustainable Natural-Fiber Rugs & Floor Textiles',
+    image: IMAGES.floorRug,
+    materials: ['Natural-Fiber Rugs', 'Woven Sustainable Textiles', 'Custom Sizing Options'],
+    features: ['Bespoke Dimensions', 'Eco-Friendly Dyes', 'Commercial Grade', 'Heritage Weaving'],
+    description: 'Natural-fiber floor coverings that bring sustainable elegance to any interior. Custom sizing available for commercial and residential projects.',
+  },
+];
+
+export const SUSTAINABILITY_ITEMS = [
+  'GOTS Certified Materials',
+  'Natural Dye Processes',
+  'Ethical Artisan Partnerships',
+  'Traceable Supply Chains',
+  'Responsible Fiber Sourcing',
+  'Zero-Waste Commitment',
+];
+
+export const NAV_LINKS = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Products', path: '/products' },
+  { label: 'Sustainability', path: '/sustainability' },
+  { label: 'Global Network', path: '/global-network' },
+  { label: 'Why Choose Us', path: '/why-choose-us' },
+  { label: 'Contact', path: '/contact' },
+];
