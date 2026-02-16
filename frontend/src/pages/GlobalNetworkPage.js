@@ -10,10 +10,10 @@ import { DecryptedText } from '@/components/reactbits/DecryptedText';
 const regions = [
   { name: 'India', specialty: 'Organic cotton, handloom textiles, hand-embroidered collections', color: '#FF725E' },
   { name: 'Bangladesh', specialty: 'GOTS-certified knitted and woven textiles', color: '#00D26A' },
-  { name: 'Nepal', specialty: 'Handwoven wool and pashmina, artisan throws', color: '#6200EA' },
-  { name: 'Sri Lanka', specialty: 'Coconut fiber, coir-based floor textiles', color: '#2E5CFF' },
-  { name: 'Pakistan', specialty: 'Premium cotton bedding, terry toweling', color: '#FF725E' },
   { name: 'Turkey', specialty: 'Linen blends, Turkish towels, premium weaves', color: '#2E5CFF' },
+  { name: 'Portugal', specialty: 'High-quality stonewashed linen, premium bedding', color: '#6200EA' },
+  { name: 'Belgium', specialty: 'World-renowned flax linen, high-end finishing', color: '#FFB300' },
+  { name: 'Netherlands', specialty: 'Sustainable textile innovation, logistics hub', color: '#E91E63' },
 ];
 
 const capabilities = [
